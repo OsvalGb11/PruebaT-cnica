@@ -10,16 +10,16 @@
 
 <body class="text-center">
   <main class="form-signin">
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <img class="mb-4" srcset="https://www.atid.edu.mx/en/wp-content/uploads/2018/11/circulo_atid-23-150x150.png 150w, https://www.atid.edu.mx/en/wp-content/uploads/2018/11/circulo_atid-23.png 208w" alt="" width="200" height="200">
       <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
 
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="rol">
         <label for="floatingInput">Rol</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
         <label for="floatingPassword">Password</label>
       </div>
       <button class="w-100 btn btn-lg" type="submit" style="background-color: #00817B; color: white;">Entrar</button>
