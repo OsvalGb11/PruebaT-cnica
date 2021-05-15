@@ -12,16 +12,15 @@ export class CardsComponent implements OnInit {
   // quote={
 
   // }
-  quote!: Quote
+  // public quote: Quote;
   constructor(
-    private loginservice:LoginService, 
-    // public quote: Quote
+    private loginservice:LoginService
   ) { }
 
   ngOnInit(): void {
-  this.loginservice.cards().subscribe(quote => {
-    this.quote = quote;
-   console.log(quote)
+  this.loginservice.cards().subscribe((d: any) => {
+    // this.quote = d;
+   console.log(d)
   });
   }
 
