@@ -1,16 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BienvenidaComponent } from './bienvenida/bienvenida.component';
+import { CardsComponent } from './cards/cards.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path:'',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
     component: LoginComponent,
   },
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'bienvenida',
+    component: BienvenidaComponent, 
+    canActivate: [AuthGuard], 
+},
+  { path: 'cards', 
+    component: CardsComponent  
+},
+  {
+    path: '**',
+    redirectTo: 'login',
   },
   // {
   //   path:'',
