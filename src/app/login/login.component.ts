@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
     const formValue = this.loginForm.value;
     this.loginservice.login(formValue).subscribe(res =>{
       if(res){
-        window.alert('Bienvenido')
-        // this.router.navigate(['./home'])
+        window.alert('Bienvenido');
+        this.router.navigate(['./home'])
       }else{
         window.alert('Error en las credenciales')
       }
