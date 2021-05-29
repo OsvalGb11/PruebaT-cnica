@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Prueba</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class=" card-body " *ngFor="let quote of quotes ">
+    <p class="card-text ">{{quote.quote}}</p>
+    <h5 class="card-title ">Autor: {{quote.author}}</h5>
+    <a class="btn btn-primary " (click)="next() ">Next</a>
   </div>
 </div>

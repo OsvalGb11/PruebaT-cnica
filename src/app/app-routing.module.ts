@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReservaComponent } from './reserva/reserva.component'
 import { BienvenidaComponent } from './bienvenida/bienvenida.component';
 import { CardsComponent } from './cards/cards.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { LinksComponent } from './links/links.component'
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
@@ -21,13 +23,23 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'bienvenida',
-    component: BienvenidaComponent, 
-    canActivate: [AuthGuard], 
-},
-  { path: 'cards', 
-    component: CardsComponent  
-},
+  {
+    path: 'bienvenida',
+    component: BienvenidaComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'cards',
+    component: CardsComponent
+  },
+  {
+    path:'reserva',
+    component: ReservaComponent
+  },
+  {
+    path:'links',
+    component: LinksComponent
+  },
   {
     path: '**',
     redirectTo: 'login',

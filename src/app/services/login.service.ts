@@ -5,7 +5,8 @@ import { Observable, throwError } from 'rxjs';
 import { User, UserResponse } from '../models/user.model';
 import {catchError, map} from 'rxjs/operators'
 import {Md5} from 'ts-md5/dist/md5';
-import { Quote } from '../models/quote.model';
+import {QuoteData} from '../models/quoteResponse.model';
+import {ICountriesData} from '../interfaces/getContries.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -40,8 +41,27 @@ export class LoginService {
     window.alert(errorMessage);
     return throwError(errorMessage)
   }
-  cards(): Observable<Quote> {
-    return this.http.get<Quote>(this.quoteURL);
+
+
+
+
+  cards(): Observable<QuoteData[]> {
+    return this.http.get<QuoteData[]>(this.quoteURL);
+  }
+
+  caragaQuotes(){
+    const url = 'https://www.breakingbadapi.com/api/quotes'
+    return this.http.get<QuoteData>(url);
+  }
+
+  quotesbyId(id:number){
+    const url = 'https://www.breakingbadapi.com/api/quotes/'+`${id}`
+    return this.http.get<QuoteData[]>(url);
+  }
+
+  paises(){
+    const url = 'https://api.first.org/data/v1/countries?region=africa&limit=10&pretty=true'
+    return this.http.get<ICountriesData>(url)
   }
 
   

@@ -19,18 +19,27 @@ public role:any;
   ngOnInit(): void {
     // const token = localStorage.getItem('token');
     // const rol = localStorage.getItem('role');
-    this.userCheck();
+    // this.userCheckA();
+    // this.userCheckb();
   }
 
-  userCheck(){
-    const token = localStorage.getItem('token');
-    const rol = localStorage.getItem('role');
-
-    if(token){
-      this.role = localStorage.getItem('role');
-      console.log(this.role)
-    }
-  }
+  // userCheckA(){
+  //   const rol = localStorage.getItem('role')
+  //   if(rol==='ROL-A'){
+  //     console.log('autorizado');
+  //   }else{
+  //     console.log('no autorizado')
+  //   }
+  // }
+  
+  // userCheckb(){
+  //   const rol = localStorage.getItem('role')
+  //   if(rol==='ROL-B'){
+  //     console.log('autorizado');
+  //   }else{
+  //     console.log('no autorizado')
+  //   }
+  // }
 
 
   logout(){
@@ -40,5 +49,12 @@ public role:any;
 
   cards(){
     this.router.navigate(['./cards'])
+  }
+
+  reserva(){
+    this.router.navigate(['./reserva'])
+  }
+  links(){
+    this.router.navigate(['./links'])
   }
 }
