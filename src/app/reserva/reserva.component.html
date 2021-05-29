@@ -1,4 +1,4 @@
-<h1>Bienvenido al sistema de reservas</h1>
+<!-- <h1>Bienvenido al sistema de reservas</h1>
 <table mat-table [dataSource]="datos" class="mat-elevation-z8" #tabla1>
 
   <ng-container matColumnDef="fecha">
@@ -43,4 +43,82 @@
 
   <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
 
+</div> -->
+<div class="container">
+  <form [formGroup]="formulario">
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" class="form-control" formControlName="nombre">
+      <div *ngIf="formulario.controls['nombre'].invalid && formulario.controls['nombre'].dirty" class="alert alert-warning" role="alert">
+        <span *ngIf="formulario.controls['nombre'].errors.required">El nombre es requerido...</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Correo</label>
+      <input type="email" class="form-control" formControlName="correo">
+      <div *ngIf="formulario.controls['correo'].invalid && formulario.controls['correo'].dirty">
+        <div *ngIf="formulario.controls['correo'].errors.required" class="alert alert-warning" role="alert">
+          Correo es requerido
+        </div>
+        <div class="alert alert-warning" role="alert">
+          Correo inválido...
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-4">
+      <label>Fecha</label>
+      <input type="date" class="form-control" displayFormat="DD/MM/YYYY" formControlName="fecha" min="2020-09-01" max="maximDia">
+      <!-- <div class="alert alert-warning" role="alert">
+        Fecha debe ser menor a 11 mayor...
+      </div>
+      <div class="alert alert-warning" role="alert">
+        No existe fecha próxima...
+      </div> -->
+    </div>
+    <!-- {{maximDia}} -->
+    <!-- <div class="form-group mb-4">
+      <label>País</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Seleccione una opción</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <div class="alert alert-warning" role="alert">
+        País es requerido...
+      </div>
+    </div> -->
+    <button [disabled]="!formulario.valid" class="btn btn-success" (click)="reservar()">Reservar</button>
+  </form>
 </div>
+
+<!-- <p>
+  {{formulario.value | json}}
+</p>
+
+<div *ngFor="let reserva of reservas">
+  <h4>{{reserva.nombre}}</h4>
+  <p>{{reserva.correo}}</p>
+  <p>{{reserva.fecha}}</p>
+</div> -->
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Correo</th>
+      <th scope="col">País</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reserva of reservas">
+      <th>{{reserva.fecha}}</th>
+      <td>{{reserva.nombre}}</td>
+      <td>{{reserva.correo}}</td>
+      <td>@mdo</td>
+    </tr>
+  </tbody>
+</table>

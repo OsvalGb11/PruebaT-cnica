@@ -6,7 +6,7 @@ import { User, UserResponse } from '../models/user.model';
 import {catchError, map} from 'rxjs/operators'
 import {Md5} from 'ts-md5/dist/md5';
 import {QuoteData} from '../models/quoteResponse.model';
-import {ICountriesData} from '../interfaces/getContries.interface'
+import {ICountriesResponse,ICountriesData} from '../interfaces/getContries.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -59,9 +59,9 @@ export class LoginService {
     return this.http.get<QuoteData[]>(url);
   }
 
-  paises(){
+  paises():Observable<any>{
     const url = 'https://api.first.org/data/v1/countries?region=africa&limit=10&pretty=true'
-    return this.http.get<ICountriesData>(url)
+    return this.http.get(url);
   }
 
   

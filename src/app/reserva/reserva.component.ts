@@ -1,8 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
-import { ICountriesData } from '../interfaces/getContries.interface'
-import { MatTable } from '@angular/material/table';
+interface Reserva{
+  nombre: string,
+  correo:string,
+  fecha: Date
+}
+interface Country{
+  country: string,
+  region:string
+}
+
 
 @Component({
   selector: 'app-reserva',
@@ -10,41 +18,63 @@ import { MatTable } from '@angular/material/table';
   styleUrls: ['./reserva.component.scss']
 })
 export class ReservaComponent implements OnInit {
-  columnas: string[] = ['fecha', 'nombre', 'correo', 'pais'];
+  formulario!: FormGroup;
+  reservas: Array<Reserva> = new Array<Reserva>();
+  countries: Array<Country> = new Array<Country>();
+  maximDia:string;
 
-  datos: Articulo[] = [
-    new Articulo("22/12/2021", 'papas', "test@leaderfy.com", "méxico")
-  ];
-  articuloselect: Articulo = new Articulo("", "", "","");
-  @ViewChild(MatTable)
-  tabla1!: MatTable<Articulo>;
-  reserva!: FormGroup;
-  submitted = false;
-  public countries: ICountriesData[] = [];
-
-  constructor(private formBuilder: FormBuilder, private loginservice: LoginService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginservice: LoginService
+    ) {
+    this.maximDia = this.fechamanana();
+    this.maximDia.trim()
+   }
 
   ngOnInit() { 
-    // this.fechamanana();
+    this.crearFormulario();
+    this.fechamanana();
+    this.listarpaises();
+    // console.log('Dia maximo: '+this.maximDia.toLocaleDateString());
+  }
+  crearFormulario(){
+    this.formulario=this.formBuilder.group({
+      nombre:['',Validators.compose([
+        Validators.required,
+        Validators.minLength(3)
+      ])],
+      correo:['', Validators.compose([
+        Validators.required,
+        Validators.pattern('([a-zA-Z0-9]+)([\.{1}])?([a-zA-Z0-9]+)\@(?:gmail|hotmail)([\.])(?:com)')
+      ])],
+      fecha:['',Validators.required],
+      // pais:['',Validators.required]
+    })
   }
 
-  agregar() {
-    this.datos.push(new Articulo(this.articuloselect.fecha, this.articuloselect.nombre, this.articuloselect.correo, this.articuloselect.pais));
-    this.tabla1.renderRows();
-    this.articuloselect = new Articulo("", "", "","");
+  reservar(){
+    this.reservas.push(this.formulario.value as Reserva);
+    this.formulario.reset();
   }
 
-  // fechamanana(){
-  //   let hoy = new Date();
-  //   let DIA_EN_MILISEGUNDOS = 24 * 60 * 60 * 1000;
-  //   let manana = new Date(hoy.getTime() + DIA_EN_MILISEGUNDOS);
-  //   return manana;
-  // }
+  fechamanana(){
+    let hoy = new Date();
+    let DIA_EN_MILISEGUNDOS = 24 * 60 * 60 * 1000;
+    let manana = new Date(hoy.getTime() + DIA_EN_MILISEGUNDOS);
+    // console.log(manana.toLocaleDateString('en-GB',))
+    return manana.toLocaleDateString('en-GB');
+  }
+
+
+
+
+  listarpaises(){
+    this.loginservice.paises().subscribe(res=>{
+      // this.countries.push()
+      console.log(res.data)
+    })
+  }
+  
 }
 
 
-export class Articulo {
-  constructor(public fecha: string, public nombre: string, public correo: string, public pais:string) {
-  }
-
-}
