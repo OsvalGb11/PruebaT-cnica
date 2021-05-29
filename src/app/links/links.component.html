@@ -1,5 +1,33 @@
-<div class="container">
-  <label for="">Ingresa tu URL</label>
-  <input type="text" placeholder="url" />
-  <button type="submit">Acortar</button>
+<h1>Bienvenido usuario, ingrese una URL</h1>
+<div *ngIf="mostrarError" class="alert alert-dismissible alert-danger">
+  <strong>{{textError | uppercase}}</strong>
+</div>
+<div class="input-group mb-4">
+  <input [(ngModel)]="nombreUrl" type="text" class="form-control" placeholder="Ingrese una url" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <button (click)="procesar()" class="btn btn-outline-secondary" type="button" id="button-addon2">Acortar Url</button>
+</div>
+<div>
+
+  <div class="sk-folding-cube" *ngIf="loading">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Url Original</th>
+        <th scope="col">Url acortada</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let enlace of enlaces">
+      <tr>
+        <td>{{enlace.ori}}</td>
+        <td>
+          <a href="{{enlace.short}}">{{enlace.short}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

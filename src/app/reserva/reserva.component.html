@@ -27,7 +27,7 @@
 <div class="contenedor">
 
   <mat-form-field>
-    <input matInput [(ngModel)]="articuloselect.fecha" type="date" placeholder="Ingrese Fecha">
+    <input matInput [(ngModel)]="articuloselect.fecha" type="date" placeholder="Ingrese Fecha" min="2020-09-25" max="fechamanana()">
   </mat-form-field>
 
   <mat-form-field>
