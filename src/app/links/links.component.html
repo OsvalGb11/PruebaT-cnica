@@ -6,7 +6,7 @@
 </div>
 <div class="input-group mb-4">
   <input [(ngModel)]="nombreUrl" type="text" class="form-control" placeholder="Ingrese una url" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <button (click)="procesar()" class="btn btn-outline-primary" type="button" id="button-addon2">Acortar Url</button>
+  <button [disabled]="nombreUrl === ''" (click)="procesar()" class="btn btn-outline-primary" type="button" id="button-addon2">Acortar Url</button>
 </div>
 <div class="sk-folding-cube" *ngIf="loading">
   <div class="sk-cube1 sk-cube"></div>
