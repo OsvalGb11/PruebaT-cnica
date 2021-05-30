@@ -1,0 +1,22 @@
+.container {
+  font-size: 2em;
+  text-align: center;
+  line-height: 1.5em;
+  font-style: italic;
+}
+
+.card-title {
+  font-size: 1em;
+}
+
+.padre {
+  background-image: url('../../assets/back/294071.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  /*IMPORTANTE*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

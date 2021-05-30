@@ -30,15 +30,18 @@ const routes: Routes = [
   },
   {
     path: 'cards',
-    component: CardsComponent
+    component: CardsComponent,
+    canActivate: [AuthGuard],
   },
   {
     path:'reserva',
-    component: ReservaComponent
+    component: ReservaComponent,
+    canActivate: [AuthGuard],
   },
   {
     path:'links',
-    component: LinksComponent
+    component: LinksComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

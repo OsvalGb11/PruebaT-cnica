@@ -5,28 +5,29 @@
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="permisoB">
       <a class="nav-link active" aria-current="page">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg> Bienvenida
       </a>
     </li>
-    <li>
+    <li *ngIf="permisoB">
       <a class="nav-link text-white" (click)="cards()">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> Breaking bad API
       </a>
     </li>
-    <li>
+    <li *ngIf="permisoB">
       <a class="nav-link text-white" (click)="reserva()">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg> Reserva
       </a>
     </li>
-    <li>
+    <li *ngIf="!permisoB">
       <a class="nav-link text-white" (click)="links()">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg> ShortterLink
       </a>
     </li>
   </ul>
   <hr>
+  <h1>{{role}}</h1>
   <a (click)="logout()">Salir</a>
 </div>
 <app-bienvenida></app-bienvenida>

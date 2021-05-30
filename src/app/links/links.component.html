@@ -1,19 +1,20 @@
-<h1>Bienvenido usuario, ingrese una URL</h1>
+<div class="bg">
+</div>
+<h1>Bienvenido usuario, ingrese una URL válida:</h1>
 <div *ngIf="mostrarError" class="alert alert-dismissible alert-danger">
   <strong>{{textError | uppercase}}</strong>
 </div>
 <div class="input-group mb-4">
   <input [(ngModel)]="nombreUrl" type="text" class="form-control" placeholder="Ingrese una url" aria-label="Recipient's username" aria-describedby="button-addon2">
-  <button (click)="procesar()" class="btn btn-outline-secondary" type="button" id="button-addon2">Acortar Url</button>
+  <button (click)="procesar()" class="btn btn-outline-primary" type="button" id="button-addon2">Acortar Url</button>
 </div>
-<div>
-
-  <div class="sk-folding-cube" *ngIf="loading">
-    <div class="sk-cube1 sk-cube"></div>
-    <div class="sk-cube2 sk-cube"></div>
-    <div class="sk-cube4 sk-cube"></div>
-    <div class="sk-cube3 sk-cube"></div>
-  </div>
+<div class="sk-folding-cube" *ngIf="loading">
+  <div class="sk-cube1 sk-cube"></div>
+  <div class="sk-cube2 sk-cube"></div>
+  <div class="sk-cube4 sk-cube"></div>
+  <div class="sk-cube3 sk-cube"></div>
+</div>
+<div class="padre">
   <table class="table">
     <thead>
       <tr>

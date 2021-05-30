@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bienvenida.component.scss']
 })
 export class BienvenidaComponent implements OnInit {
+  public role:any;
   constructor() { }
 
   ngOnInit(): void {
-    localStorage.getItem('token');
+    this.role=localStorage.getItem('role');
   }
   
 

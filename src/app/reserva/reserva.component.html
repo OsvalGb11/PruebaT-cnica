@@ -1,124 +1,59 @@
-<!-- <h1>Bienvenido al sistema de reservas</h1>
-<table mat-table [dataSource]="datos" class="mat-elevation-z8" #tabla1>
-
-  <ng-container matColumnDef="fecha">
-    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-    <td mat-cell *matCellDef="let articulo"> {{articulo.fecha}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="nombre">
-    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-    <td mat-cell *matCellDef="let articulo"> {{articulo.nombre}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="correo">
-    <th mat-header-cell *matHeaderCellDef> Correo </th>
-    <td mat-cell *matCellDef="let articulo"> {{articulo.correo}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="pais">
-    <th mat-header-cell *matHeaderCellDef> País </th>
-    <td mat-cell *matCellDef="let articulo"> {{articulo.pais}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-  <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
-</table>
-<div class="contenedor">
-
-  <mat-form-field>
-    <input matInput [(ngModel)]="articuloselect.fecha" type="date" placeholder="Ingrese Fecha" min="2020-09-25" max="fechamanana()">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput [(ngModel)]="articuloselect.nombre" type="text" placeholder="Ingrese Nombre">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput [(ngModel)]="articuloselect.correo" type="email" placeholder="Ingrese Correo">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput [(ngModel)]="articuloselect.pais" type="text" placeholder="Ingrese País">
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" (click)="agregar()">Agregar</button>
-
-</div> -->
-<div class="container">
-  <form [formGroup]="formulario">
-    <div class="form-group">
-      <label>Nombre</label>
-      <input type="text" class="form-control" formControlName="nombre">
-      <div *ngIf="formulario.controls['nombre'].invalid && formulario.controls['nombre'].dirty" class="alert alert-warning" role="alert">
-        <span *ngIf="formulario.controls['nombre'].errors.required">El nombre es requerido...</span>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>Correo</label>
-      <input type="email" class="form-control" formControlName="correo">
-      <div *ngIf="formulario.controls['correo'].invalid && formulario.controls['correo'].dirty">
-        <div *ngIf="formulario.controls['correo'].errors.required" class="alert alert-warning" role="alert">
-          Correo es requerido
-        </div>
-        <div class="alert alert-warning" role="alert">
-          Correo inválido...
+<div class="padre">
+  <p class="h1">¡Bienvenido al menú de reservas!</p>
+  <p class="display-6 h1">Por favor ingrese los datos que se le solicitan a continuación:</p>
+  <div class="container">
+    <form [formGroup]="formulario">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre">
+        <div *ngIf="formulario.controls['nombre'].invalid && formulario.controls['nombre'].dirty" class="alert alert-warning" role="alert">
+          <span *ngIf="formulario.controls['nombre'].errors.required">El nombre es requerido...</span>
         </div>
       </div>
-    </div>
 
-    <div class="form-group mb-4">
-      <label>Fecha</label>
-      <input type="date" class="form-control" displayFormat="DD/MM/YYYY" formControlName="fecha" min="2020-09-01" max="maximDia">
-      <!-- <div class="alert alert-warning" role="alert">
-        Fecha debe ser menor a 11 mayor...
+      <div class="form-group">
+        <label>Correo</label>
+        <input type="email" class="form-control" formControlName="correo">
+        <div *ngIf="formulario.controls['correo'].invalid && formulario.controls['correo'].dirty">
+          <div *ngIf="formulario.controls['correo'].errors.required" class="alert alert-warning" role="alert">
+            Correo es requerido
+          </div>
+          <div class="alert alert-warning" role="alert">
+            Correo inválido...
+          </div>
+        </div>
       </div>
-      <div class="alert alert-warning" role="alert">
-        No existe fecha próxima...
-      </div> -->
-    </div>
-    <!-- {{maximDia}} -->
-    <!-- <div class="form-group mb-4">
-      <label>País</label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Seleccione una opción</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+
+      <div class="form-group mb-4">
+        <label>Fecha</label>
+        <input [attr.min]="min" [attr.max]="max" type="date" class="form-control" displayFormat="DD/MM/YYYY" formControlName="fecha" max="maximDia">
+      </div>
+      <div class="form-group mb-4">
+        <label>País</label>
+        <select class="form-select" formControlName="pais">
+        <option *ngFor="let country of countries" value="{{country.country}}" >{{country.country}}</option>
       </select>
-      <div class="alert alert-warning" role="alert">
-        País es requerido...
       </div>
-    </div> -->
-    <button [disabled]="!formulario.valid" class="btn btn-success" (click)="reservar()">Reservar</button>
-  </form>
+      <button [disabled]="!formulario.valid" class="btn btn-success" (click)="reservar()">Reservar</button>
+    </form>
+  </div>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Correo</th>
+        <th scope="col">País</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reserva of reservas">
+        <th>{{reserva.fecha}}</th>
+        <td>{{reserva.nombre}}</td>
+        <td>{{reserva.correo}}</td>
+        <td>{{reserva.pais}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-<!-- <p>
-  {{formulario.value | json}}
-</p>
-
-<div *ngFor="let reserva of reservas">
-  <h4>{{reserva.nombre}}</h4>
-  <p>{{reserva.correo}}</p>
-  <p>{{reserva.fecha}}</p>
-</div> -->
-
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">Fecha</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Correo</th>
-      <th scope="col">País</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let reserva of reservas">
-      <th>{{reserva.fecha}}</th>
-      <td>{{reserva.nombre}}</td>
-      <td>{{reserva.correo}}</td>
-      <td>@mdo</td>
-    </tr>
-  </tbody>
-</table>

@@ -1,7 +1,17 @@
-<div class="card" style="width: 18rem;">
-  <div class=" card-body " *ngFor="let quote of quotes ">
-    <p class="card-text ">{{quote.quote}}</p>
-    <h5 class="card-title ">Autor: {{quote.author}}</h5>
-    <a class="btn btn-primary " (click)="next() ">Next</a>
+<div class="padre">
+  <div *ngIf="vacio" class="alert alert-dismissible alert-danger">
+    <strong>No hay Datos por mostrar</strong>
+  </div>
+  <div class="container">
+    <div class="card w-100">
+      <div class="card">
+        <div class=" card-body " *ngFor="let quote of quotes ">
+          <p class="card-text">"{{quote.quote}}"</p>
+          <h5 class="card-title">Autor: {{quote.author}}</h5>
+        </div>
+        <a class="btn btn-primary " (click)="next() ">Next</a>
+        <button [disabled]="vacio" class="btn btn-warning " (click)="prev() ">Prev</button>
+      </div>
+    </div>
   </div>
 </div>
